@@ -14,7 +14,7 @@ a:hover {
 }
 
 .main {
-	background-image: url(20400435.jpg);
+	background-color: black;
 	background-size: cover;
 	display: flex;
 	flex-flow: row wrap;

@@ -1,8 +1,8 @@
 import "../assets/style.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../stores/action/actionCreator";
-export default function Sidebar() {
+import { getDetail, searchUsers } from "../stores/action/actionCreator";
+export default function Sidebar({setSearch}) {
   const dispatch = useDispatch();
   const [formFilter, setFormFilter] = useState({});
 
@@ -15,8 +15,8 @@ export default function Sidebar() {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(formFilter);
-    // dispatch(getDetail(1));
+    setSearch(true)
+    dispatch(searchUsers(formFilter))
   };
   return (
     <div className="col-3" style={{ textAlign: "center" }}>
@@ -27,7 +27,7 @@ export default function Sidebar() {
         <form onSubmit={submitHandler}>
           <div className="mb-5 row" style={{ justifyContent: "center", marginTop: "30px" }}>
             <div>
-              <input type="text" className="form-control" placeholder="Search by user name" name="name" onChange={changeHandler} />
+              <input type="text" className="form-control" placeholder="Search by name" name="name" onChange={changeHandler} />
             </div>
           </div>
           <input className="btn btn-primary" type="submit" value="Search" />

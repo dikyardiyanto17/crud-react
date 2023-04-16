@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../components/Pagination.js";
 import Sidebar from "../components/Sidebar.js";
@@ -8,6 +8,7 @@ import loading from '../assets/loading.gif'
 import Users from "../components/Users.js";
 export default function Home() {
   const users = useSelector((state) => state.users.users);
+  const [search, setSearch] = useState(false)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUsers());
@@ -15,15 +16,15 @@ export default function Home() {
   return (
     <>
       <div className="d-flex col main">
-        <Sidebar />
+        <Sidebar setSearch={setSearch}/>
         <div className="col-9">
           <div className="border border-slate-800 bg-slate-900/70 mt-3 p-5 text-center" style={{ minHeight: "80vh" }}>
             <h1>Home</h1>
             <div className="d-flex justify-content-center">
-              <Table bordered responsive size="sm" style={{ color: "white" }}>
+              {users.length !== 0 && <Table bordered responsive size="sm" style={{ color: "white" }}>
                 <thead>
                   <tr>
-                    <th>User Id</th>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Age</th>
                     <th>Gender</th>
@@ -41,10 +42,11 @@ export default function Home() {
                     })}
                   </tbody>
                 )}
-              </Table>
+              </Table>}
             </div>
-             {users.length == 0 && <img src={loading} />}
-            <Pagination />
+            {users?.length == 0 && !search && <img src={loading} />}
+            {!search && <Pagination />}
+            {search && users.length == 0 && <h1>User Not Found</h1>}
           </div>
         </div>
       </div>

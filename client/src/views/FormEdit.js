@@ -48,6 +48,9 @@ export default function EditUser() {
 
     const defaultBirthDate = (dateUser) => new Date(dateUser).toISOString().substr(0, 10);
 
+    useEffect(() => {
+        dispatch(getDetail(userid))
+    }, [])
     return (
         <>
             <div className='main' style={{ 'padding': '20px' }}>
