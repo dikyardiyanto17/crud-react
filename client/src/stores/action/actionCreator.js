@@ -33,7 +33,7 @@ export const getUsers = (skip = 0) => {
 
 export const addUser = (formAdd) => {
     return (dispatch) => {
-        return fetch(baseUrl, {
+        return fetch(baseUrl + "add", {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,11 +45,14 @@ export const addUser = (formAdd) => {
                 return resp.json()
             } else {
                 return resp.json().then((error) => {
+                    console.log("Error")
                     throw new Error(error.message);
                 })
             }
         })
-        .then(() => dispatch(getUsers()))
+        .then(data => {
+            console.log(data)
+        })
     }
 }
 
