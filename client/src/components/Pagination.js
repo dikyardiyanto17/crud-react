@@ -39,44 +39,55 @@ export default function Pagination() {
         className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
         onClick={() => {
           setCurrentPage(currentPage - 1);
+          setTimeout(() => {
+            dispatch(getUsers(currentPage * 10));
+          }, 1000);
         }}
       >
-        <a href="#" className="page-link">
+        <span style={{cursor: 'pointer'}} className="page-link">
           Previous
-        </a>
+        </span>
       </li>
       {startPage > 1 && (
         <li className="page-item">
-          <a href="#" className="page-link">
+          <span style={{cursor: 'pointer'}} className="page-link">
             ...
-          </a>
+          </span>
         </li>
       )}
-      {pages.map((page) => (
+      {pages.map((page, index) => (
         <li
           key={page}
           className={`page-item ${currentPage === page ? "active" : ""}`}
           onClick={() => {
             setCurrentPage(page);
-            dispatch(getUsers(currentPage * 10));
+            setTimeout(() => {
+              dispatch(getUsers((page-1) * 10));
+            }, 1000);
           }}
         >
-          <a href="#" className="page-link">
+          <span style={{cursor: 'pointer'}} className="page-link">
             {page}
-          </a>
+          </span>
         </li>
       ))}
       {endPage < totalPages && (
         <li className="page-item">
-          <a href="#" className="page-link">
+          <span style={{cursor: 'pointer'}} className="page-link">
             ...
-          </a>
+          </span>
         </li>
       )}
-      <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`} onClick={() => setCurrentPage(currentPage + 1)}>
-        <a href="#" className="page-link">
+      <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`} onClick={() => {
+        setCurrentPage(currentPage + 1)
+        setTimeout(() => {
+          dispatch(getUsers(currentPage * 10));
+        }, 1000);
+      }
+        }>
+        <span style={{cursor: 'pointer'}} className="page-link">
           Next
-        </a>
+        </span>
       </li>
     </ul>
   );

@@ -1,4 +1,4 @@
-import { FetchingTotalItems, FetchingUser, FetchingUsers } from "../action/actionType"
+import { FetchingTotalItems, FetchingUser, FetchingUsers, ResetUser } from "../action/actionType"
 
 const initialState = {
     users: [],

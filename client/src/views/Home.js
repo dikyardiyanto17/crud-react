@@ -4,6 +4,7 @@ import Pagination from "../components/Pagination.js";
 import Sidebar from "../components/Sidebar.js";
 import Table from "react-bootstrap/Table";
 import { getUsers } from "../stores/action/actionCreator.js";
+import loading from '../assets/loading.gif'
 import Users from "../components/Users.js";
 export default function Home() {
   const users = useSelector((state) => state.users.users);
@@ -42,6 +43,7 @@ export default function Home() {
                 )}
               </Table>
             </div>
+             {users.length == 0 && <img src={loading} />}
             <Pagination />
           </div>
         </div>

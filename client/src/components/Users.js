@@ -1,7 +1,11 @@
 import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+import { getDetail } from '../stores/action/actionCreator';
 
 export default function Users({user, index}) {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   return (
     <>
       <tr>
@@ -17,7 +21,12 @@ export default function Users({user, index}) {
         <td style={{ maxWidth: "150px", minWidth: "150px" }}>{user.address.address}</td>
         <td className="d-flex justify-content-center flex-wrap" style={{ minWidth: "200px" }}>
           {" "}
-          <Link className="btn btn-primary" style={{ width: "100px", margin: "10px auto" }}>
+          <Link className="btn btn-primary" style={{ width: "100px", margin: "10px auto" }} onClick={() => {
+            dispatch(getDetail(user.id))
+            setTimeout(() => {
+              navigate("/edituser/"+user.id)
+            }, 500);
+          }}>
             Edit
           </Link>{" "}
           <Button variant="danger" style={{ width: "100px", margin: "10px auto" }} >

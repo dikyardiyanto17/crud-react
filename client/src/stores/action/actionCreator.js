@@ -88,7 +88,9 @@ export const editUser = (formEdit, userId) => {
                 })
             }
         })
-        .then(data => dispatch(getUsers()))
+        .then(data => {
+            console.log(data)
+        })
     }
 }
 
