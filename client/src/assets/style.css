@@ -32,7 +32,7 @@ a:hover {
 }
 
 #logo-custom {
-	flex: 0 5%;
+	margin: 0 auto;
 }
 
 #nav-bar-custom {

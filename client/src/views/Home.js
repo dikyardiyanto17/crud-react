@@ -1,3 +1,4 @@
+import Pagination from '../components/Pagination.js';
 import Sidebar from '../components/Sidebar.js'
 export default function Home() {
   return (
@@ -8,8 +9,8 @@ export default function Home() {
           <div className="border border-slate-800 bg-slate-900/70 mt-3 p-5 text-center" style={{ minHeight: "80vh" }}>
             <h1>Home</h1>
             <div className="d-flex justify-content-center">
-              
             </div>
+            <Pagination />
           </div>
         </div>
       </div>

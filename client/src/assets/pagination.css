@@ -1,0 +1,30 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-link {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: #333;
+}
+
+.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dots {
+  display: inline-block;
+  padding: 5px 10px;
+  color: #333;
+}

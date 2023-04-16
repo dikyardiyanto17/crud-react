@@ -1,43 +1,35 @@
-import { FetchingAccount, FetchingAccounts, FetchingCategories, FetchingCategory } from "./actionType"
-const baseUrl = 'http://localhost:3001'
+import { FetchingUser, FetchingUsers } from "./actionType"
+const baseUrl = 'https://dummyjson.com/users/'
 
-export const fetchAccounts = (payload) => {
-    return { type: FetchingAccounts, payload }
+export const fetchUsers = (payload) => {
+    return { type: FetchingUsers, payload }
 }
 
-export const fetchCategories = (payload) => {
-    return { type: FetchingCategories, payload }
+export const fetchUser = (payload) => {
+    return { type: FetchingUser, payload }
 }
 
-export const fetchAccount = (payload) => {
-    return { type: FetchingAccount, payload }
-}
 
-export const fetchCategory = (payload) => {
-    return { type: FetchingCategory, payload }
-}
-
-export const getAccounts = (query = '') => {
+export const getUsers = () => {
     return (dispatch) => {
-        fetch(baseUrl + '/products' + query, {
+        fetch(baseUrl, {
             method: "get",
             headers: {
                 'Content-Type': 'application/json',
             },
         })
             .then(resp => resp.json())
-            .then(data => dispatch(fetchAccounts(data)))
+            .then(data => dispatch(fetchUsers(data)))
             .catch(error => console.log(error))
     }
 }
 
-export const addAccounts = (formAdd) => {
+export const addUser = (formAdd) => {
     return (dispatch) => {
-        return fetch(baseUrl + '/products', {
+        return fetch(baseUrl, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                access_token: localStorage.access_token
             },
             body: JSON.stringify(formAdd)
         })
@@ -50,31 +42,30 @@ export const addAccounts = (formAdd) => {
                 })
             }
         })
-        .then(() => dispatch(getAccounts()))
+        .then(() => dispatch(getUsers()))
     }
 }
 
-export const getDetail = (accountId) => {
+export const getDetail = (userId) => {
     return (dispatch) => {
-        fetch(baseUrl + `/products/${accountId}`, {
+        fetch(baseUrl + userId, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
             },
         })
             .then(resp => resp.json())
-            .then(data => dispatch(fetchAccount(data)))
+            .then(data => dispatch(fetchUser(data)))
             .catch(error => console.log(error))
     }
 }
 
-export const editAccounts = (formEdit, accountId) => {
+export const editUser = (formEdit, userId) => {
     return (dispatch) => {
-        return fetch(baseUrl + '/products/' + accountId, {
+        return fetch(baseUrl + userId, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
-                access_token: localStorage.access_token
             },
             body: JSON.stringify(formEdit)
         })
@@ -87,20 +78,19 @@ export const editAccounts = (formEdit, accountId) => {
                 })
             }
         })
-        .then(data => dispatch(getAccounts()))
+        .then(data => dispatch(getUsers()))
     }
 }
 
-export const deleteAccount = (accountId) => {
+export const deleteUser = (userId) => {
     return (dispatch) => {
-        fetch(baseUrl + '/products/' + accountId, {
+        fetch(baseUrl + userId, {
             method: "delete",
             headers: {
                 'Content-Type': 'application/json',
-                access_token: localStorage.access_token
             }
         })
-            .then(() => dispatch(getAccounts()))
+            .then(() => dispatch(getUsers()))
             .catch(error => console.log(error))
     }
 }
