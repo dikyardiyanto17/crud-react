@@ -1,16 +1,19 @@
-import { FetchingUser, FetchingUsers } from "../action/actionType"
+import { FetchingTotalItems, FetchingUser, FetchingUsers } from "../action/actionType"
 
 const initialState = {
     users: [],
-    user: {}
+    user: {},
+    totalItems: 0
 }
 
 function usersReducer(state = initialState, action) {
     switch (action.type) {
         case FetchingUsers:
-            return { ...state, accounts: action.payload }
+            return { ...state, users: action.payload }
         case FetchingUser:
-            return {...state, account: action.payload}
+            return {...state, user: action.payload}
+        case FetchingTotalItems:
+            return {...state, totalItems: action.payload}
         default:
             return state
     }

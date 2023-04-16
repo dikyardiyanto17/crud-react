@@ -1,10 +1,14 @@
 import "../assets/pagination.css";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../stores/action/actionCreator";
 
 export default function Pagination() {
+  const totalItems = useSelector((state) => state.users.totalItems);
+  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(5 / 2);
+  const totalPages = Math.ceil(totalItems / 10);
 
   let startPage, endPage;
 
@@ -31,7 +35,12 @@ export default function Pagination() {
 
   return (
     <ul className="pagination">
-      <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`} onClick={() => setCurrentPage(currentPage - 1)}>
+      <li
+        className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+        onClick={() => {
+          setCurrentPage(currentPage - 1);
+        }}
+      >
         <a href="#" className="page-link">
           Previous
         </a>
@@ -44,7 +53,14 @@ export default function Pagination() {
         </li>
       )}
       {pages.map((page) => (
-        <li key={page} className={`page-item ${currentPage === page ? "active" : ""}`} onClick={() => setCurrentPage(page)}>
+        <li
+          key={page}
+          className={`page-item ${currentPage === page ? "active" : ""}`}
+          onClick={() => {
+            setCurrentPage(page);
+            dispatch(getUsers(currentPage * 10));
+          }}
+        >
           <a href="#" className="page-link">
             {page}
           </a>

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
+import AddUser from "../views/FormAdd";
 import Home from "../views/Home";
 
 const router = createBrowserRouter([
@@ -15,10 +16,10 @@ const router = createBrowserRouter([
     //     path: "detail/:accountId",
     //     element: <Detail />,
     //   },
-    //   {
-    //     path: "addaccount",
-    //     element: <AddAccount />,
-    //   },
+      {
+        path: "adduser",
+        element: <AddUser />,
+      },
     //   {
     //     path: "editaccount/:accountId",
     //     element: <EditAccount />,

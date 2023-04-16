@@ -1,4 +1,4 @@
-import { FetchingUser, FetchingUsers } from "./actionType"
+import { FetchingTotalItems, FetchingUser, FetchingUsers } from "./actionType"
 const baseUrl = 'https://dummyjson.com/users/'
 
 export const fetchUsers = (payload) => {
@@ -9,17 +9,24 @@ export const fetchUser = (payload) => {
     return { type: FetchingUser, payload }
 }
 
+export const fetchTotalUsers = (payload) => {
+    return { type: FetchingTotalItems, payload }
+}
 
-export const getUsers = () => {
+
+export const getUsers = (skip = 0) => {
     return (dispatch) => {
-        fetch(baseUrl, {
+        fetch(baseUrl + `?limit=10&skip=${skip}`, {
             method: "get",
             headers: {
                 'Content-Type': 'application/json',
             },
         })
             .then(resp => resp.json())
-            .then(data => dispatch(fetchUsers(data)))
+            .then(data => {
+                dispatch(fetchUsers(data.users))
+                dispatch(fetchTotalUsers(data.total))
+            })
             .catch(error => console.log(error))
     }
 }

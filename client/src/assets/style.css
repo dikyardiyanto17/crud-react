@@ -35,6 +35,10 @@ a:hover {
 	margin: 0 auto;
 }
 
+.navbar-links {
+	text-decoration: none;
+}
+
 #nav-bar-custom {
 	text-align: center;
 	font-weight: 300;
